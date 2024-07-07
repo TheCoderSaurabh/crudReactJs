@@ -8,7 +8,7 @@ const Edit = () => {
     const [userData, setUserData]= useState({name: "", email: ""});
     // console.log(id);
     useEffect(()=>{
-        axios.get("https://667ef325f2cb59c38dc795b0.mockapi.io/users/"+id).then((data)=>{
+        axios.get("http://localhost:4000/users/"+id).then((data)=>{
         setUserData(data.data)
         });
     }, [id])
@@ -21,7 +21,7 @@ const Edit = () => {
     function handleFormSubmitdata(e){
         e.preventDefault();
         console.log(userData);
-        axios.put("https://667ef325f2cb59c38dc795b0.mockapi.io/users/"+id, userData).then((data)=>{
+        axios.patch("http://localhost:4000/users/"+id, userData).then((data)=>{
             console.log(data);
         });
     }
@@ -37,7 +37,7 @@ const Edit = () => {
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" name="email" onChange={handleInputChange} value={userData.email}    placeholder="name@example.com" />
         </Form.Group>
-        <button type="submit">Update</button>
+        <button type="submit" >Update</button>
       </Form>
     </div>
   );

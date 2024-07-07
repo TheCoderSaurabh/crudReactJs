@@ -9,12 +9,13 @@ import ChildComp2 from "./pages/ChildComp2";
 import User from "./components/User";
 import Edit from "./components/Edit";
 import Create from "./components/Create";
-import Delete from "./components/Delete";
-
+import SearchUser from "./components/SearchUser";
+import Navcomp from "./components/Navcomp"
 
 const App = () => {
   return (
     <>
+    <Navcomp/>
       <Nav />
 
       <Routes>
@@ -26,8 +27,7 @@ const App = () => {
         <Route path="/user" element={<User />} />
         <Route path="/edituser/:id" element={<Edit/>} />
         <Route path="/createuser" element={<Create/>} />
-        <Route path="/deleteuser" element={<Delete/>} />
-
+        <Route path="/searchuser" element={<SearchUser/>} />
 
 
       </Routes>

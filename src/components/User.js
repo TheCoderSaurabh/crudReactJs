@@ -8,18 +8,31 @@ const User = () => {
   useEffect(() => {
     async function getUrlData() {
       const data = await axios.get(
-        "https://667ef325f2cb59c38dc795b0.mockapi.io/users"
+        "http://localhost:4000/users"
       );
+      console.log(data);
       setlistUser(data.data);
     }
     getUrlData();
   }, []);
 
+  async function handleDelete(id){
+    console.log(id);
+    const data = await axios.delete(
+      "http://localhost:4000/users/"+id
+    );
+    setlistUser(values => {
+      return values.filter(item => item._id !== id)
+    })
+    console.log(data)
+  }
   return (
     <>
       <h1>Users List</h1>
       <h2>Add User: 
-        <Link to='/createuser'>CreateUser</Link>
+        <Link to='/createuser'>CreateUser</Link><br></br>
+        Search User:
+        <Link to='/searchuser'>SearchUser</Link>
       </h2><br></br>
       <table className="table table-hover">
         <thead>
@@ -27,7 +40,7 @@ const User = () => {
             <th>#</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Id</th>
+            {/* <th>Id</th> */}
             <th>operation</th>
           </tr>
         </thead>
@@ -38,10 +51,10 @@ const User = () => {
                 <td>{index + 1}</td>
                 <td>{data.name}</td>
                 <td>{data.email}</td>
-                <td>{data.id}</td>
+                {/* <td>{data._id}</td> */}
                 <td>
-                  <Link to={"/edituser/"+ data.id}><button className="btn btn-primary">Edit</button></Link>
-                  <Link to={"/deleteuser/"+ data.id}><button className="btn btn-danger">Delete</button></Link>
+                  <Link to={"/edituser/"+ data._id}><button className="btn btn-primary">Edit</button></Link>
+                  <Link to={(e)=>e.preventDefault()}><button onClick={()=>handleDelete(data._id)} className="btn btn-danger">Delete</button></Link>
                 </td>
               </tr>
             );
